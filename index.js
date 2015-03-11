@@ -28,6 +28,7 @@ function checkIfSatisfied(hypothesis, testData) {
 function generateHypothesis() {
     try {
         eval('function hypothesis(input) { return ' + getRandomExpression() + ';}');
+        hypothesis();
     } catch (e) {
         return generateHypothesis();
     }
@@ -35,7 +36,7 @@ function generateHypothesis() {
 }
 
 function getRandomExpression() {
-    var length = Math.ceil(Math.random() * 2),
+    var length = Math.ceil(Math.random() * 3),
         expression = '';
 
     for(var i = 0; i < length; i++) {
@@ -50,6 +51,6 @@ function getRandomToken() {
     return TOKENS[Math.floor(Math.random() * TOKENS.length)];
 }
 
-var TOKENS = ['input','++','--'];
+var TOKENS = ['input','++','--','10','*'];
 
 module.exports = programSynthesis;

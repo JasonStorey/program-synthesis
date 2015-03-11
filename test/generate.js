@@ -3,7 +3,7 @@ describe('Program Synthesis', function() {
     var programSynthesis = require('../'),
         assert = require('assert');
 
-    this.timeout(5000);
+    this.timeout(10000);
 
     describe('generate method', function() {
         it('returns a function that satisfies the list of provided test inputs and expected outputs', function() {
@@ -47,7 +47,6 @@ describe('Program Synthesis', function() {
 
             var generatedFunction = programSynthesis.generate(testData);
 
-            assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction(10), 11, 'Function should increment input argument');
         });
 
@@ -63,8 +62,22 @@ describe('Program Synthesis', function() {
 
             var generatedFunction = programSynthesis.generate(testData);
 
-            assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction(10), 9, 'Function should decrement input argument');
+        });
+
+        it('returns a function that multiplies input by 10', function() {
+            var testData = [{
+                    input: 10,
+                    output: 100
+                },
+                {
+                    input: 9,
+                    output: 90
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert.deepEqual(generatedFunction(1), 10, 'Function should multiply input argument by 10');
         });
     });
 });
