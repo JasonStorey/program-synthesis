@@ -4,8 +4,8 @@ var programSynthesis = {
 
 var TOKENS = ['arguments[0]','arguments[1]','arguments[2]','++','--','10','*'];
 
-programSynthesis.generate = function(testData) {
-    var MAX_ITERATIONS = 10000,
+programSynthesis.generate = function(testData, maxIterations) {
+    var MAX_ITERATIONS = maxIterations || 1000000,
         iterationIndex = 0;
 
     programSynthesis.history = {};
@@ -52,11 +52,11 @@ function getRandomExpression() {
         expression += ' ';
     }
 
-    //if(programSynthesis.history[expression] === true) {
-    //    expression = getRandomExpression();
-    //} else {
-    //    programSynthesis.history[expression] = true;
-    //}
+    if(programSynthesis.history[expression] === true) {
+        expression = getRandomExpression();
+    } else {
+        programSynthesis.history[expression] = true;
+    }
 
     return expression;
 }

@@ -16,7 +16,7 @@ describe('Program Synthesis', function() {
                     output: 'bye'
                 }];
 
-            assert.throws(function(){ programSynthesis.generate(testData)}, /Failed to generate a valid hypothesis/g);
+            assert.throws(function(){ programSynthesis.generate(testData, 10)}, /Failed to generate a valid hypothesis/g);
         });
 
         it('returns a function that satisfies the list of provided test inputs and expected outputs', function() {
