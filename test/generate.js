@@ -4,8 +4,17 @@ describe('Program Synthesis', function() {
         assert = require('assert');
 
     describe('generate method', function() {
-        it('returns a function that satisfies the provided test input and expected output arguments', function() {
-            var generatedFunction = programSynthesis.generate('hello', 'hello');
+        it('returns a function that satisfies the list of provided test inputs and expected outputs', function() {
+            var testData = [{
+                    input: 'hello',
+                    output: 'hello'
+                },
+                {
+                    input: 'bye',
+                    output: 'bye'
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
 
             assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction('bye'), 'bye', 'Function should return input argument');

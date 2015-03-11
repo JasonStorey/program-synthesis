@@ -1,20 +1,26 @@
 var programSynthesis = {};
 
-programSynthesis.generate = function(testInput, expectedOutput) {
+programSynthesis.generate = function(testData) {
 
     function generatedFunction(input) { return false; }
 
-    while(generatedFunction(testInput) !== expectedOutput) {
+    while(!checkIfSatisfied(generatedFunction, testData)) {
         generatedFunction = function(input) {
-            return input;
+            return eval(getRandomToken());
         };
     }
 
     return generatedFunction;
 };
 
-function getRandomToken() {
+function checkIfSatisfied(func, testData) {
+    return testData.every(function(data) {
+        return func(data.input) === data.output;
+    });
+}
 
+function getRandomToken() {
+    return 'input';
 }
 
 module.exports = programSynthesis;
