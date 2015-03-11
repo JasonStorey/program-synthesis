@@ -6,6 +6,19 @@ describe('Program Synthesis', function() {
     this.timeout(10000);
 
     describe('generate method', function() {
+        it('throws an error if it cannot satisfy in/out pairs', function() {
+            var testData = [{
+                    input: 'hello',
+                    output: 'bye'
+                },
+                {
+                    input: 'hello',
+                    output: 'bye'
+                }];
+
+            assert.throws(function(){ programSynthesis.generate(testData)}, /Failed to generate a valid hypothesis/g);
+        });
+
         it('returns a function that satisfies the list of provided test inputs and expected outputs', function() {
             var testData = [{
                     input: 'hello',
@@ -20,19 +33,6 @@ describe('Program Synthesis', function() {
 
             assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction('bye'), 'bye', 'Function should return input argument');
-        });
-
-        it('throws an error if it cannot satisfy in/out pairs', function() {
-            var testData = [{
-                    input: 'hello',
-                    output: 'bye'
-                },
-                {
-                    input: 'hello',
-                    output: 'bye'
-                }];
-
-            assert.throws(function(){ programSynthesis.generate(testData)}, /Failed to generate a valid hypothesis/g);
         });
 
         it('returns a function that increments input', function() {
@@ -78,6 +78,21 @@ describe('Program Synthesis', function() {
             var generatedFunction = programSynthesis.generate(testData);
 
             assert.deepEqual(generatedFunction(1), 10, 'Function should multiply input argument by 10');
+        });
+
+        it('returns a function that multiplies input args', function() {
+            var testData = [{
+                    input: [5,5,5],
+                    output: 125
+                },
+                {
+                    input: [3,3,3],
+                    output: 27
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert.deepEqual(generatedFunction(2,2,2), 8, 'Function should multiply input args');
         });
     });
 });

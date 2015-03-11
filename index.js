@@ -1,8 +1,14 @@
-var programSynthesis = {};
+var programSynthesis = {
+    history: {}
+};
+
+var TOKENS = ['arguments[0]','arguments[1]','arguments[2]','++','--','10','*'];
 
 programSynthesis.generate = function(testData) {
-    var MAX_ITERATIONS = 100000,
+    var MAX_ITERATIONS = 10000,
         iterationIndex = 0;
+
+    programSynthesis.history = {};
 
     function generatedFunction(input) { return false; }
 
@@ -21,7 +27,8 @@ programSynthesis.generate = function(testData) {
 
 function checkIfSatisfied(hypothesis, testData) {
     return testData.every(function(data) {
-        return hypothesis(data.input) === data.output;
+        var args = data.input instanceof Array ? data.input : [data.input];
+        return hypothesis.apply(null, args) === data.output;
     });
 }
 
@@ -32,11 +39,12 @@ function generateHypothesis() {
     } catch (e) {
         return generateHypothesis();
     }
+
     return hypothesis;
 }
 
 function getRandomExpression() {
-    var length = Math.ceil(Math.random() * 3),
+    var length = Math.ceil(Math.random() * 10),
         expression = '';
 
     for(var i = 0; i < length; i++) {
@@ -44,13 +52,17 @@ function getRandomExpression() {
         expression += ' ';
     }
 
+    //if(programSynthesis.history[expression] === true) {
+    //    expression = getRandomExpression();
+    //} else {
+    //    programSynthesis.history[expression] = true;
+    //}
+
     return expression;
 }
 
 function getRandomToken() {
     return TOKENS[Math.floor(Math.random() * TOKENS.length)];
 }
-
-var TOKENS = ['input','++','--','10','*'];
 
 module.exports = programSynthesis;
