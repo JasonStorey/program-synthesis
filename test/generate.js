@@ -50,5 +50,21 @@ describe('Program Synthesis', function() {
             assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction(10), 11, 'Function should increment input argument');
         });
+
+        it('returns a function that decrements input', function() {
+            var testData = [{
+                    input: 1,
+                    output: 0
+                },
+                {
+                    input: 4,
+                    output: 3
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert(typeof generatedFunction === 'function');
+            assert.deepEqual(generatedFunction(10), 9, 'Function should decrement input argument');
+        });
     });
 });
