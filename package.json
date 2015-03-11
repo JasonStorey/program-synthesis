@@ -1,0 +1,14 @@
+{
+  "name": "program-synthesis",
+  "version": "0.0.1",
+  "description": "Experimenting with program synthesis in js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Jason A. Storey",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  }
+}
