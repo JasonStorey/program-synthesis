@@ -19,5 +19,18 @@ describe('Program Synthesis', function() {
             assert(typeof generatedFunction === 'function');
             assert.deepEqual(generatedFunction('bye'), 'bye', 'Function should return input argument');
         });
+
+        it('throws an error if cannot satisfy in/out pairs', function() {
+            var testData = [{
+                    input: 'hello',
+                    output: 'bye'
+                },
+                {
+                    input: 'hello',
+                    output: 'bye'
+                }];
+
+            assert.throws(function(){ programSynthesis.generate(testData)}, /Failed to generate a valid hypothesis/g);
+        });
     });
 });
