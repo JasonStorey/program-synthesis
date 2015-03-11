@@ -1,7 +1,7 @@
 var programSynthesis = {};
 
 programSynthesis.generate = function(testData) {
-    var MAX_ITERATIONS = 1000000,
+    var MAX_ITERATIONS = 100000,
         iterationIndex = 0;
 
     function generatedFunction(input) { return false; }
@@ -11,9 +11,7 @@ programSynthesis.generate = function(testData) {
             throw new Error('Failed to generate a valid hypothesis');
         }
 
-        generatedFunction = function(input) {
-            return eval(getRandomToken());
-        };
+        generatedFunction = generateHypothesis();
 
         iterationIndex++;
     }
@@ -21,14 +19,37 @@ programSynthesis.generate = function(testData) {
     return generatedFunction;
 };
 
-function checkIfSatisfied(func, testData) {
+function checkIfSatisfied(hypothesis, testData) {
     return testData.every(function(data) {
-        return func(data.input) === data.output;
+        return hypothesis(data.input) === data.output;
     });
 }
 
-function getRandomToken() {
-    return 'input';
+function generateHypothesis() {
+    try {
+        eval('function hypothesis(input) { return ' + getRandomExpression() + ';}');
+    } catch (e) {
+        return generateHypothesis();
+    }
+    return hypothesis;
 }
+
+function getRandomExpression() {
+    var length = Math.ceil(Math.random() * 2),
+        expression = '';
+
+    for(var i = 0; i < length; i++) {
+        expression += getRandomToken();
+        expression += ' ';
+    }
+
+    return expression;
+}
+
+function getRandomToken() {
+    return TOKENS[Math.floor(Math.random() * TOKENS.length)];
+}
+
+var TOKENS = ['input','++','--'];
 
 module.exports = programSynthesis;
