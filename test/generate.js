@@ -100,13 +100,13 @@ describe('Program Synthesis', function() {
                     output: false
                 },
                 {
-                    input: [100, 100],
+                    input: [100,100],
                     output: true
                 }];
 
             var generatedFunction = programSynthesis.generate(testData);
 
-            assert.deepEqual(generatedFunction(1,1), true, 'Function should return true');
+            assert.deepEqual(generatedFunction('egg','egg'), true, 'Function should return true');
         });
     });
 });
