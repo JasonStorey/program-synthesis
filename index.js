@@ -10,6 +10,8 @@ programSynthesis.generate = function(testData, maxIterations) {
         return false;
     }
 
+    hypothesisGenerator.reset();
+
     while(!checkIfSatisfied(generatedFunction, testData)) {
         if(iterationIndex === MAX_ITERATIONS) {
             throw new Error('Failed to generate a valid hypothesis');

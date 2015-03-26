@@ -102,6 +102,10 @@ describe('Program Synthesis', function() {
                 {
                     input: [100,100],
                     output: true
+                },
+                {
+                    input: ['buddy','please'],
+                    output: false
                 }];
 
             var generatedFunction = programSynthesis.generate(testData);
