@@ -1,5 +1,4 @@
 describe('Program Synthesis', function() {
-
     var programSynthesis = require('../'),
         assert = require('assert');
 
@@ -93,6 +92,21 @@ describe('Program Synthesis', function() {
             var generatedFunction = programSynthesis.generate(testData);
 
             assert.deepEqual(generatedFunction(2,2,2), 8, 'Function should multiply input args');
+        });
+
+        it('returns a function that performs equality check', function() {
+            var testData = [{
+                    input: [5,10],
+                    output: false
+                },
+                {
+                    input: [100, 100],
+                    output: true
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert.deepEqual(generatedFunction(1,1), true, 'Function should return true');
         });
     });
 });
