@@ -112,5 +112,20 @@ describe('Program Synthesis', function() {
 
             assert.deepEqual(generatedFunction('egg','egg'), true, 'Function should return true');
         });
+
+        it('returns a function that depends on conditionals', function() {
+            var testData = [{
+                    input: [true,'Richard','Feynman'],
+                    output: 'Richard'
+                },
+                {
+                    input: [false,'Ken','Dodd'],
+                    output: 'Dodd'
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert.deepEqual(generatedFunction(true,'Luther','Vandross'), 'Luther', 'Function should return second name');
+        });
     });
 });
