@@ -81,12 +81,12 @@ describe('Program Synthesis', function() {
 
         it('returns a function that multiplies input args', function() {
             var testData = [{
-                    input: [5,5,5],
-                    output: 125
+                    input: [2,3,5],
+                    output: 30
                 },
                 {
-                    input: [3,3,3],
-                    output: 27
+                    input: [4,5,6],
+                    output: 120
                 }];
 
             var generatedFunction = programSynthesis.generate(testData);
