@@ -110,6 +110,10 @@ describe('Program Synthesis', function() {
                 {
                     input: ['buddy','please'],
                     output: false
+                },
+                {
+                    input: ['buddy','buddy'],
+                    output: true
                 }];
 
             var generatedFunction = programSynthesis.generate(testData);
