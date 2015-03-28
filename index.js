@@ -11,6 +11,7 @@ programSynthesis.generate = function(testData, maxIterations) {
     }
 
     hypothesisGenerator.reset();
+    hypothesisGenerator.analyse(testData);
 
     while(!checkIfSatisfied(generatedFunction, testData)) {
         if(iterationIndex === MAX_ITERATIONS) {

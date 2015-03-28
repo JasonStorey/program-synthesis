@@ -2,7 +2,7 @@ describe('Program Synthesis', function() {
     var programSynthesis = require('../'),
         assert = require('assert');
 
-    this.timeout(10000);
+    this.timeout(30000);
 
     describe('generate method', function() {
         it('throws an error if it cannot satisfy in/out pairs', function() {
@@ -57,6 +57,10 @@ describe('Program Synthesis', function() {
                 {
                     input: 4,
                     output: 3
+                },
+                {
+                    input: 2,
+                    output: 1
                 }];
 
             var generatedFunction = programSynthesis.generate(testData);
@@ -126,6 +130,21 @@ describe('Program Synthesis', function() {
             var generatedFunction = programSynthesis.generate(testData);
 
             assert.deepEqual(generatedFunction(true,'Luther','Vandross'), 'Luther', 'Function should return second name');
+        });
+
+        it('returns a function that converts celsius to fahrenheit', function() {
+            var testData = [{
+                    input: 30,
+                    output: 86
+                },
+                {
+                    input: 10,
+                    output: 50
+                }];
+
+            var generatedFunction = programSynthesis.generate(testData);
+
+            assert.deepEqual(generatedFunction(20), 68, 'Function should convert celsius to fahrenheit');
         });
     });
 });
