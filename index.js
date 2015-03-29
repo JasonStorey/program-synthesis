@@ -4,7 +4,7 @@ var programSynthesis = {};
 
 programSynthesis.generate = function(testData, maxIterations) {
     var options = {
-        maxIterations: maxIterations || 1000000,
+        maxIterations: maxIterations || 5000000,
         testData: testData
     };
 
